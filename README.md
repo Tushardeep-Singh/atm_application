@@ -7,7 +7,34 @@ It took me a while to find a way to insert each transaction successfuly in the d
 In future hopefully, I would like to add a check for characters while selecting the option from the main-menu. <br />
 
 Run project : <br />
-working...... <br />
+
+VISUAL STUDIO CODE:
+
+1. CLONE:
+    1. Open visual studio code
+    2. Command + shift + p (Mac users)
+    3. Select Git: Clone
+    4. Copy and paste: https://github.com/Tushardeep-Singh/atm_application
+    5. Press enter and open the clone’d project
+2. CONFIGURE:
+    1. Enter main.cpp
+    2. Terminal -> Configure Tasks… -> C/C++: clang++ build active file
+    3.  tasks.json gets created
+    4. Add at top of array args:
+
+ 	      "-std=c++17",       
+        "-stdlib=libc++",
+
+	5. Replace "${file}" with "*.cpp"
+
+3. BUILD:
+    1. Enter main.cpp
+    2. Terminal -> Run Build Task… -> C/C++: clang++ build active file
+    3. Build finished successfully.
+4. COMPILATION:
+    1. Click in terminal area and press any key
+    2. Type ./main and press enter.
+
 
 Usage : <br />
 1. Select any one option from main-menu. There is no check for a character input.!! <br />
