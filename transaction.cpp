@@ -3,8 +3,10 @@
  */
 
 // transaction.cpp
-#include "iostream"
-#include "iomanip"
+#include <iostream>
+#include <cctype>
+#include <iomanip>
+#include <string>
 #include "menu.h"
 using namespace::std;
 
@@ -43,6 +45,9 @@ void transactions(){
         double* deposit_sum {new double (0)};
         double* withdraw_sum {new double {0}};
     
+        // Extras :
+        string err {"ERROR.. "};
+    
     do{
         showMenu(); // showMenu() prints out the options menu
         cout << "What would you like to do ? (program doesn't check for characters)" << endl;
@@ -50,7 +55,7 @@ void transactions(){
         cin >> option;
         
         if(option <= 0 || option > 4){
-            cout << "Please select correct option\n" << endl;
+            cout << err << "Please select correct option\n" << endl;
         }else{
             switch(option){
                     
@@ -66,17 +71,17 @@ void transactions(){
 
                             if(*depositAmount < *min_deposit){
                                     cout << endl;
-                                    cout << "ERROR!! Minimum deposit amount is " << *min_deposit << "$" << endl;
+                                    cout << err << "Minimum deposit amount is " << *min_deposit << "$" << endl;
                                     cout << "Please try again..\n" << endl;
                             }else if(*depositAmount > *max_deposit){
                                     cout << endl;
-                                    cout << "Not Allowed" << endl;
+                                    cout << err << "Not Allowed" << endl;
                                     cout << "Max ATM deposit : " << *max_deposit << endl;
                                     cout << "Our customer service representative will be happy to assit you..\n" << endl;
                             }else{
                                     balance += *depositAmount; // balance updated
                                     if(total_deposited_amount > *acc_limit){
-                                        cout << "Account can not hold more than 100000$.." << endl;
+                                        cout << err << "Account can not hold more than 100000$.." << endl;
                                         cout << "No amount deposited.." << endl;
                                         balance -= *depositAmount; // balance corrected
                                         cout << "Your balance : " << balance << "$" << endl;
@@ -92,7 +97,7 @@ void transactions(){
                                     }
                             }
                     }else{ // below, transaction limit reached
-                        cout << "Sorry, only " << *transaction_limit << " deposits per program execution..\n" << endl;
+                        cout << err << "Only " << *transaction_limit << " deposits per program execution..\n" << endl;
                     }
                     break;
                 } // case 2 ends
@@ -104,13 +109,13 @@ void transactions(){
                         cin >> *withdrawAmount;
                         
                         if(*withdrawAmount > balance){
-                            cout << "ERROR.. Not enough funds.." << endl;
+                            cout << err << "Not enough funds.." << endl;
                             cout << "Account balance : " << balance << "$" << endl;
                             cout << "Amount requested : " << *withdrawAmount << "$\n" << endl;
                         }else if(*withdrawAmount > *max_withdraw_limit){
-                            cout << "ERROR.. Maximum Withdrawl limit : " << *max_withdraw_limit << "$\n" << endl;
+                            cout << err << "Maximum Withdrawl limit : " << *max_withdraw_limit << "$\n" << endl;
                         }else if(*withdrawAmount < *min_withdraw_limit){
-                            cout << "ERROR.. Minimum withdrawl limit : " << *min_withdraw_limit << "$\n" << endl;
+                            cout << err << "Minimum withdrawl limit : " << *min_withdraw_limit << "$\n" << endl;
                         }else{
                             cout << "Processing withdrawl....." << endl;
                             cout << "***Withdrawl Successfull***" << endl;
@@ -124,7 +129,7 @@ void transactions(){
                         }
                         
                     }else{ // below, transaction limit reached
-                        cout << "Sorry, only " << *transaction_limit << " withdrawls per program execution.." << endl;
+                        cout << err << "Only " << *transaction_limit << " withdrawls per program execution.." << endl;
                     }
                     break;
                 } // case 3 ends
